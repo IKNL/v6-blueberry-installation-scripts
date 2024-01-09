@@ -35,7 +35,7 @@ To get started with these scripts, follow these steps:
 
 1. Clone this repository to your local machine: `git clone https://github.com/IKNL/v6-blueberry-installation-scripts.git`
 3. Navigate to the cloned repository: `cd vantage6-blueberry-installation-scripts`
-4. Run the `install-all.sh` script: `sh ./install-all.sh`
+4. Run the `install-all.sh` script: `sudo ./install-all.sh`
 
 ### Details
 This scripts will install the following components:

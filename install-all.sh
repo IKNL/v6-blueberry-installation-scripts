@@ -1,27 +1,33 @@
 #!/bin/bash
 
-source ./utils.sh
+SCRIPT_DIR=$(realpath "$(dirname "$0")")
+
+source $SCRIPT_DIR/utils.sh
+LOG_DIR=$SCRIPT_DIR/logs
+
 print_intro
 confirm_or_exit
+mkdir -p $LOG_DIR
 
 # Update the current system
-print_header "Updating the current system"
-sudo dnf update -y &>> update-system.log
+print_header "Updating the current system (this may take a while)"
+sudo dnf update -y &>> $LOG_DIR/update-system.log
+print_step "System updated"
 
 # Run the install-docker.sh script
 print_header "Installing Docker"
-source ./install-docker.sh
+source $SCRIPT_DIR/install-docker.sh
 
 # Run the install-miniconda.sh script
 print_header "Installing Miniconda"
-source ./install-miniconda.sh
+source $SCRIPT_DIR/install-miniconda.sh
 
 # Run the install-vantage6.sh script
 print_header "Installing vantage6"
-source ./install-vantage6.sh
+source $SCRIPT_DIR/install-vantage6.sh
 
 # Configure the vantage6-node
 print_header "Creating vantage6-node"
-source ./create-node.sh
+source $SCRIPT_DIR/create-node.sh
 
 print_outro

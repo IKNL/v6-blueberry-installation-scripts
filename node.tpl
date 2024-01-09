@@ -1,5 +1,5 @@
 # API key used to authenticate at the server.
-api_key: $(API_KEY)
+api_key: ${API_KEY}
 
 # URL of the vantage6 server
 server_url: https://blueberry.vantage6.ai
@@ -47,12 +47,12 @@ algorithm_device_requests:
 # algorithm does not use the wrapper and you have a different type of
 # data source you can specify 'other'.
 databases:
-  - label: default
-    uri: C:\data\datafile.csv
-    type: csv
+  # - label: default
+  #   uri: C:\data\datafile.csv
+  #   type: csv
 
   - label: omop
-    uri: jdbc:postgresql://$(OMOP_HOST):$(OMOP_PORT)/$(OMOP_DATABASE)
+    uri: jdbc:postgresql://${OMOP_HOST}:${OMOP_PORT}/${OMOP_DATABASE}
     # additional environment variables that are passed to the algorithm
     # containers (or their wrapper). This can be used to for usernames
     # and passwords for example. Note that these environment variables are
@@ -61,21 +61,21 @@ databases:
     # algorithms regard less of the data source the user specifies you can
     # use the `algorithm_env` setting.
     env:
-      username: $(OMOP_USER)
-      password: $(OMOP_PASSWORD)
+      username: ${OMOP_USER}
+      password: ${OMOP_PASSWORD}
       dbms: postgresql
-      cdm_database: $(OMOP_DATABASE)
-      cdm_schema: $(OMOP_CDM_SCHEMA)
-      results_schema: $(OMOP_RESULT_SCHEMA)
+      cdm_database: ${OMOP_DATABASE}
+      cdm_schema: ${OMOP_CDM_SCHEMA}
+      results_schema: ${OMOP_RESULT_SCHEMA}
 
 
-# # end-to-end encryption settings
-# encryption:
+# end-to-end encryption settings
+encryption:
 
-#   # whenever encryption is enabled or not. This should be the same
-#   # as the `encrypted` setting of the collaboration to which this
-#   # node belongs.
-#   enabled: false
+  # whenever encryption is enabled or not. This should be the same
+  # as the `encrypted` setting of the collaboration to which this
+  # node belongs.
+  enabled: false
 
 #   # location to the private key file
 #   private_key: /path/to/private_key.pem
@@ -85,7 +85,7 @@ policies:
   # Control which algorithm images are allowed to run on this node. This is
   # expected to be a valid regular expression.
   allowed_algorithms:
-    - ^harbor2.vantage6.ai/[a-zA-Z]+/[a-zA-Z]+
+    - ^harbor2\.vantage6.ai/[a-zA-Z]+/[a-zA-Z]+
     # - myalgorithm.ai/some-algorithm
   # # Define which users are allowed to run algorithms on your node by their ID
   # allowed_users:
@@ -117,7 +117,7 @@ ssh-tunnels:
   # hostname that the algorithm uses to connect to the data source. Make
   # sure this is unique and the same as what you specified in the
   # `databases` section of the configuration file.
-  - hostname: $(TUNNEL_HOSTNAME)
+  - hostname: ${TUNNEL_HOSTNAME}
 
     # SSH configuration of the remote machine
     ssh:
@@ -126,18 +126,18 @@ ssh-tunnels:
       # host you can use `host.docker.internal` for Windows and MacOS.
       # In the case of Linux you can use `172.17.0.1` (the ip of the
       # docker bridge on the host)
-      host: $(SSH_HOST)
-      port: $(SSH_PORT)
+      host: ${SSH_HOST}
+      port: ${SSH_PORT}
 
       # fingerprint of the remote machine. This is used to verify the
       # authenticity of the remote machine.
-      fingerprint: $(SSH_HOST_FINGERPRINT)
+      fingerprint: ${SSH_HOST_FINGERPRINT}
 
       # Username and private key to use for authentication on the remote
       # machine
       identity:
-        username: $(SSH_USERNAME)
-        key: $(SSH_KEY)
+        username: ${SSH_USERNAME}
+        key: ${SSH_KEY}
 
       # Once the SSH connection is established, a tunnel is created to
       # forward traffic from the local machine to the remote machine.
@@ -147,14 +147,14 @@ ssh-tunnels:
         # 0.0.0.0 as we want the algorithm container to be able to
         # connect.
         bind:
-          ip: $(TUNNEL_BIND_IP)
-          port: $(TUNNEL_BIND_PORT)
+          ip: ${TUNNEL_BIND_IP}
+          port: ${TUNNEL_BIND_PORT}
 
         # The port and ip on the remote machine. If the data source runs
         # on this machine, the ip most likely is 127.0.0.1.
         dest:
-          ip: $(TUNNEL_REMOTE_IP)
-          port: $(TUNNEL_REMOTE_PORT)
+          ip: ${TUNNEL_REMOTE_IP}
+          port: ${TUNNEL_REMOTE_PORT}
 
 # # Whitelist URLs and/or IP addresses that the algorithm containers are
 # # allowed to reach using the http protocol.
@@ -221,7 +221,7 @@ debug:
 
 
 # directory where local task files (input/output) are stored
-task_dir: $(TASK_DIR)
+task_dir: ${TASK_DIR}
 
 # Whether or not your node shares some configuration (e.g. which images are
 # allowed to run on your node) with the central server. This can be useful

@@ -15,7 +15,11 @@ function print_step() {
 }
 
 function print_warning() {
-    echo "  WARNING: $1"
+    echo -e "\e[33m  - $1\e[0m"
+}
+
+function print_error() {
+    echo -e "\e[31m  - $1\e[0m"
 }
 
 function print_header(){
@@ -52,11 +56,11 @@ print_outro(){
     print_header "Installation complete"
     echo "To check if any installation steps failed, check the log files:"
     echo ""
-    echo "  - update-system.log"
-    echo "  - docker-install.log"
-    echo "  - miniconda-install.log"
-    echo "  - vantage6-install.log"
-    echo "  - create-node.log"
+    echo "  - $LOG_DIR/update-system.log"
+    echo "  - $LOG_DIR/docker-install.log"
+    echo "  - $LOG_DIR/miniconda-install.log"
+    echo "  - $LOG_DIR/vantage6-install.log"
+    echo "  - $LOG_DIR/create-node.log"
     echo ""
     echo "If you want to use the vantage6 CLI you need to activate the vantage6 "
     echo "conda environment:"
@@ -69,7 +73,7 @@ print_outro(){
 }
 
 confirm() {
-    read -p "$1 (y/n) " response
+    read -p "  ? $1 (y/n) " response
     case "$response" in
         [yY][eE][sS]|[yY])
             true
@@ -84,5 +88,10 @@ confirm_or_exit() {
     if ! confirm "Are you sure you want to continue?"; then
         exit 1
     fi
+}
+
+function create_config_file() {
+    envsubst < "$1/node.tpl" > "$2"
+    print_step "Config file created at $HOME/.config/vantage6/node/blueberry.yml"
 }
 
