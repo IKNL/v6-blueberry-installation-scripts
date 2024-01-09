@@ -4,16 +4,11 @@ This repository contains convenience scripts for installing vantage6 nodes at da
 
 ## TODO
 
-- [ ] Fix the `$SCRIPT_DIR` variable
-- [ ] SSH Key is not set as this is computed in a subshell
-- [ ] Miniconda seems to install every time
-- [ ] `Bash` session is not invoked after installation (manual step?)
-- [ ] Start the node after installation
+- [ ] Autmaticaly after installation?
 - [ ] Add `start-node.sh` and `stop-node.sh` scripts
 - [ ] Add a job to the crontab to start the node on boot
-- [ ] Connect to `cotopaxi.vantage6.ai` to test
 - [ ] Add option to use Docker version of the OMOP database (no SSH tunneling required)
-- [ ] Finish `create-node.sh` script
+- [ ] Update this README
 
 ## Getting Started
 
