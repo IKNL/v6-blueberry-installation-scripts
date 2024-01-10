@@ -35,11 +35,5 @@ if confirm "Add cronjob to automatically start the vantage6-node on boot?"; then
     source $SCRIPT_DIR/create-cronjob.sh
 fi
 
-if confirm "Do you want to start the vantage6-node now?"; then
-    source $SCRIPT_DIR/node.sh start blueberry
-fi
-
-
-
-
 print_outro
+

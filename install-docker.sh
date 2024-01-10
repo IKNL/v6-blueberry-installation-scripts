@@ -55,8 +55,4 @@ if groups $USER | grep &>/dev/null '\bdocker\b'; then
 else
     print_step "Adding the current user '$USER' to the docker group"
     sudo usermod -aG docker $USER &>> $LOG_DIR/docker-install.log
-
-    # Apply the new group membership to the current session
-    print_step "Applying the new group membership to the current session"
-    newgrp docker &>> $LOG_DIR/docker-install.log
 fi

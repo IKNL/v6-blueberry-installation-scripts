@@ -69,6 +69,9 @@ print_outro(){
     echo ""
     echo "Make sure the OMOP database is running and listening on $TUNNEL_REMOTE_IP:$TUNNEL_REMOTE_PORT "
     echo "before starting the vantage6-node."
+    echo ""
+    echo -e "\e[1;32mYou need to restart this machine before you can start the node.\e[0m"
+
     print_divider
 }
 
