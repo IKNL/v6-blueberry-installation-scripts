@@ -3,16 +3,11 @@
 This repository contains convenience scripts for installing vantage6 nodes at data stations participating in the BLUEBERRY project.
 
 ## TODO
-
-- [ ] Autmaticaly after installation?
-- [ ] Add a job to the crontab to start the node on boot
 - [ ] Add option to use Docker version of the OMOP database (no SSH tunneling required)
-- [ ] Add check that we are indeed using the bash shell
-- [ ] Update this README
 
 ## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+These instructions will get you a running vantage6 node that is connected to the
+BLUEBERRY server.
 
 ### Prerequisites
 
@@ -24,30 +19,27 @@ sudo dnf update -y
 sudo dnf install git -y
 ```
 
+It also requires an active internet connection.
+
 ### Installing
 
 To get started with these scripts, follow these steps:
 
 1. Clone this repository to your local machine: `git clone https://github.com/IKNL/v6-blueberry-installation-scripts.git`
 3. Navigate to the cloned repository: `cd vantage6-blueberry-installation-scripts`
-4. Run the `install-all.sh` script: `sudo ./install-all.sh`
+4. Run the `install-all.sh` script: `./install-all.sh`. This will install all the necessary components and configure them for you.
 
-### Details
-This scripts will install the following components:
+### Lifecycle management
 
-- Docker
-- Miniconda
-- vantage6-node
+The `./install-all.sh` script is designed to run multiple times. You can also use it
+to update the vantage6 node to the latest version. It will not overwrite any configuration files except if you explicitly tell it to do so.
 
-It will configure a `conda` environment `vantage6` for the vantage6-node and install the necessary packages. Once the installation is complete, a vantage6-node will be configured. The script will prompt you to enter the following information:
+You have the following scripts available to manage the vantage6 node:
 
-- `API_KEY`
+- `./start.sh` - Starts the vantage6 node
+- `./stop.sh` - Stops the vantage6 node
+- `./attach.sh` - View the logs of the vantage6 node if its running
 
-The script will create a new linux user `vantage6-node` that has no `sudo` privileges.
-
-* This user is used to connect to the host machine from the vantage6 node. This is required for the vantage6 node in order to be able to connect to the OMOP database which runs at the host machine.
-* A private/public key pair is generated for this user. The public key is added to the `authorized_keys`.
-* The private key of the `vantage6-node` user is mounted into the vantage6-node container.
 
 ## License
 
