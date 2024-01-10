@@ -11,7 +11,7 @@ if ! check_command "crontab"; then
 else
     if ! (crontab -l 2>/dev/null | grep -q "$SCRIPT_DIR/start.sh"); then
         (crontab -l 2>/dev/null; echo "@reboot $SCRIPT_DIR/start.sh") | crontab -
-        print_success "Added cron job."
+        print_step "Added cron job."
     else
         print_warning "Cron job already exists."
     fi
