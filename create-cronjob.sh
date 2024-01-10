@@ -9,5 +9,10 @@ print_step "Adding cron job"
 if ! check_command "crontab"; then
     print_error "Failed to add cron job."
 else
-    (crontab -l 2>/dev/null; echo "@reboot $SCRIPT_DIR/start.sh") | crontab -
+    if ! (crontab -l 2>/dev/null | grep -q "$SCRIPT_DIR/start.sh"); then
+        (crontab -l 2>/dev/null; echo "@reboot $SCRIPT_DIR/start.sh") | crontab -
+        print_success "Added cron job."
+    else
+        print_warning "Cron job already exists."
+    fi
 fi
