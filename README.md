@@ -5,9 +5,9 @@ This repository contains convenience scripts for installing vantage6 nodes at da
 ## TODO
 
 - [ ] Autmaticaly after installation?
-- [ ] Add `start-node.sh` and `stop-node.sh` scripts
 - [ ] Add a job to the crontab to start the node on boot
 - [ ] Add option to use Docker version of the OMOP database (no SSH tunneling required)
+- [ ] Add check that we are indeed using the bash shell
 - [ ] Update this README
 
 ## Getting Started

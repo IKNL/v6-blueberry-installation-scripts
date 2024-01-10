@@ -67,13 +67,14 @@ print_outro(){
     echo ""
     echo "  conda activate vantage6"
     echo ""
-    echo "Make sure the OMOP database is running and listening on 127.0.0.1:5432 "
+    echo "Make sure the OMOP database is running and listening on $TUNNEL_REMOTE_IP:$TUNNEL_REMOTE_PORT "
     echo "before starting the vantage6-node."
     print_divider
 }
 
 confirm() {
-    read -p "  ? $1 (y/n) " response
+    echo -e -n "\e[32m  ? $1 (y/n) \e[0m"
+    read response
     case "$response" in
         [yY][eE][sS]|[yY])
             true
@@ -90,8 +91,33 @@ confirm_or_exit() {
     fi
 }
 
-function create_config_file() {
+create_config_file() {
     envsubst < "$1/node.tpl" > "$2"
-    print_step "Config file created at $HOME/.config/vantage6/node/blueberry.yml"
+    print_step "Config file created at $2"
+}
+
+
+check_command() {
+    local command_name="$1"
+
+    # Check if the command is installed
+    if ! command -v "$command_name" &> /dev/null; then
+        print_error "$command_name is not installed" >&2
+        return 1
+    fi
+
+    return 0
+}
+
+check_env() {
+    local env_name="$1"
+
+    # Check if the environment exists
+    if ! conda env list | grep -q "^$env_name "; then
+        print_error "conda environment '$env_name' does not exist" >&2
+        return 1
+    fi
+
+    return 0
 }
 

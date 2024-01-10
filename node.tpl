@@ -53,6 +53,7 @@ databases:
 
   - label: omop
     uri: jdbc:postgresql://${OMOP_HOST}:${OMOP_PORT}/${OMOP_DATABASE}
+    type: omop
     # additional environment variables that are passed to the algorithm
     # containers (or their wrapper). This can be used to for usernames
     # and passwords for example. Note that these environment variables are
@@ -139,22 +140,21 @@ ssh-tunnels:
         username: ${SSH_USERNAME}
         key: ${SSH_KEY}
 
-      # Once the SSH connection is established, a tunnel is created to
-      # forward traffic from the local machine to the remote machine.
-      tunnel:
+    # Once the SSH connection is established, a tunnel is created to
+    # forward traffic from the local machine to the remote machine.
+    tunnel:
 
-        # The port and ip on the tunnel container. The ip is always
-        # 0.0.0.0 as we want the algorithm container to be able to
-        # connect.
-        bind:
-          ip: ${TUNNEL_BIND_IP}
-          port: ${TUNNEL_BIND_PORT}
-
-        # The port and ip on the remote machine. If the data source runs
-        # on this machine, the ip most likely is 127.0.0.1.
-        dest:
-          ip: ${TUNNEL_REMOTE_IP}
-          port: ${TUNNEL_REMOTE_PORT}
+      # The port and ip on the tunnel container. The ip is always
+      # 0.0.0.0 as we want the algorithm container to be able to
+      # connect.
+      bind:
+        ip: ${TUNNEL_BIND_IP}
+        port: ${TUNNEL_BIND_PORT}
+      # The port and ip on the remote machine. If the data source runs
+      # on this machine, the ip most likely is 127.0.0.1.
+      dest:
+        ip: ${TUNNEL_REMOTE_IP}
+        port: ${TUNNEL_REMOTE_PORT}
 
 # # Whitelist URLs and/or IP addresses that the algorithm containers are
 # # allowed to reach using the http protocol.
@@ -218,7 +218,6 @@ debug:
   # Set to `true` to set the Flask app used for the LOCAL proxy service
   # into debug mode
   proxy_server: false
-
 
 # directory where local task files (input/output) are stored
 task_dir: ${TASK_DIR}

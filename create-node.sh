@@ -73,7 +73,7 @@ print_step "TUNNEL_REMOTE_PORT: $TUNNEL_REMOTE_PORT"
 # # Create the config file
 print_step "Creating the config file"
 mkdir -p $HOME/.config/vantage6/node
-CONFIG_FILE=$HOME/.config/vantage6/node/blueberry.yml
+CONFIG_FILE=$HOME/.config/vantage6/node/blueberry.yaml
 
 if [ -f "$HOME/.config/vantage6/node/blueberry.yml" ]; then
     print_warning "Config file already exists at $CONFIG_FILE"

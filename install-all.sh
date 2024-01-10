@@ -30,4 +30,16 @@ source $SCRIPT_DIR/install-vantage6.sh
 print_header "Creating vantage6-node"
 source $SCRIPT_DIR/create-node.sh
 
+print_header "Post installation steps"
+if confirm "Do you want to create a cronjob to automatically start the vantage6-node on boot?"; then
+    source $SCRIPT_DIR/create-cronjob.sh
+fi
+
+if confirm "Do you want to start the vantage6-node now?"; then
+    source $SCRIPT_DIR/node.sh start blueberry
+fi
+
+
+
+
 print_outro
