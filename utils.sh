@@ -74,7 +74,8 @@ print_outro(){
 
 confirm() {
     echo -e -n "\e[32m  ? $1 (y/n) \e[0m"
-    read response
+    read -n1 response
+    echo
     case "$response" in
         [yY][eE][sS]|[yY])
             true
