@@ -86,7 +86,7 @@ policies:
   # Control which algorithm images are allowed to run on this node. This is
   # expected to be a valid regular expression.
   allowed_algorithms:
-    - ^harbor2\.vantage6.ai/[a-zA-Z]+/[a-zA-Z]+
+    - ^harbor2\.vantage6\.ai/[a-zA-Z]+/[a-zA-Z]+
     # - myalgorithm.ai/some-algorithm
   # # Define which users are allowed to run algorithms on your node by their ID
   # allowed_users:
