@@ -24,7 +24,7 @@ else
 
     # Install the latest version of Docker Engine and containerd
     print_step "Installing Docker"
-    sudo dnf install docker-ce --nobest -y &>> $LOG_DIR/docker-install.log
+    sudo dnf install docker-ce --nobest -y --allowerasing &>> $LOG_DIR/docker-install.log
 
     # Start Docker
     print_step "Starting Docker"
