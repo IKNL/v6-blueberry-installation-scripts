@@ -5,6 +5,11 @@ NODE_NAME=$2
 
 source $SCRIPT_DIR/utils.sh
 
+if [ -f "$HOME/.bashrc" ]; then
+    source "$HOME/.bashrc"
+fi
+
+
 print_header "$COMMAND the vantage6-node"
 print_step "Checking if conda is installed"
 if ! check_command "conda"; then
@@ -24,4 +29,4 @@ conda activate vantage6
 
 # start the node
 print_step "$COMMAND the $NODE_NAME node"
-vnode $COMMAND --name $NODE_NAME
+v6 node $COMMAND --name $NODE_NAME
