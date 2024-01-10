@@ -40,8 +40,19 @@ else
         print_warning "If not, docker will not start automatically on boot"
         sudo service docker start
     fi
+fi
 
-    # Add the current user to the docker group
+if getent group docker >/dev/null; then
+    print_warning "The docker group already exists"
+else
+    print_step "Adding the docker group"
+    sudo groupadd docker &>> $LOG_DIR/docker-install.log
+fi
+
+# Add the current user to the docker group
+if groups $USER | grep &>/dev/null '\bdocker\b'; then
+    print_step "The user '$USER' is already in the docker group"
+else
     print_step "Adding the current user '$USER' to the docker group"
     sudo usermod -aG docker $USER &>> $LOG_DIR/docker-install.log
 
