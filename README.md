@@ -26,8 +26,9 @@ It also requires an active internet connection.
 To get started with these scripts, follow these steps:
 
 1. Clone this repository to your local machine: `git clone https://github.com/IKNL/v6-blueberry-installation-scripts.git`
-3. Navigate to the cloned repository: `cd vantage6-blueberry-installation-scripts`
-4. Run the `install-all.sh` script: `./install-all.sh`. This will install all the necessary components and configure them for you.
+3. Navigate to the cloned repository: `cd v6-blueberry-installation-scripts`
+4. Add execute permissions to the scripts: `chmod +x *.sh`
+5. Run the `install-all.sh` script: `./install-all.sh`. This will install all the necessary components and configure them for you.
 
 ### Lifecycle management
 
