@@ -96,7 +96,7 @@ confirm_or_exit() {
 }
 
 create_config_file() {
-    envsubst < "$1/node.tpl" > "$2"
+    envsubst < "$1" > "$2"
     print_step "Config file created at $2"
 }
 
@@ -123,5 +123,31 @@ check_env() {
     fi
 
     return 0
+}
+
+select_database_method() {
+    print_step "The following database options are available:"
+    # print_step "Please choose an option:"
+    local options=("SSH-tunnel" "Docker-service")
+    for i in "${!options[@]}"; do
+        echo "  # $((i+1)). ${options[$i]}"
+    done
+
+    while true; do
+        echo -e -n "\e[32m  ? Please select an option: \e[0m"; read -n1 -r REPLY
+        if [[ $REPLY -ge 1 && $REPLY -le ${#options[@]} ]]; then
+            opt="${options[$((REPLY-1))]}"
+            break
+        else
+            print_error "Invalid option. Please try again."
+        fi
+    done
+    DB_METHOD=$opt
+    print_step $DB_METHOD
+
+}
+
+user_input() {
+    echo -e -n "\e[32m  ? $1: \e[0m"; read -r REPLY
 }
 

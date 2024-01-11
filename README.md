@@ -2,24 +2,22 @@
 
 This repository contains convenience scripts for installing vantage6 nodes at data stations participating in the BLUEBERRY project.
 
-## TODO
-- [ ] Add option to use Docker version of the OMOP database (no SSH tunneling required)
-
 ## Getting Started
 These instructions will get you a running vantage6 node that is connected to the
 BLUEBERRY server.
 
 ### Prerequisites
 
-The scripts are designed to run on an Oracle Linux 8 Machine (server edition). During installation it requires internet access to download the necessary packages.
+- The scripts are designed to run on an Oracle Linux 8 Machine (server edition).
+- During installation it requires internet access to download the necessary packages.
+- `sudo` permissions
+- Install git:
+    ```
+    sudo dnf update -y
+    sudo dnf install git -y
+    ```
 
-Install git:
-```
-sudo dnf update -y
-sudo dnf install git -y
-```
 
-It also requires an active internet connection.
 
 ### Installing
 
