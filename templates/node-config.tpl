@@ -62,7 +62,7 @@ databases:
     # algorithms regard less of the data source the user specifies you can
     # use the `algorithm_env` setting.
     env:
-      username: ${OMOP_USER}
+      user: ${OMOP_USER}
       password: ${OMOP_PASSWORD}
       dbms: postgresql
       cdm_database: ${OMOP_DATABASE}
