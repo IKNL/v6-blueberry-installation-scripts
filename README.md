@@ -13,7 +13,8 @@ BLUEBERRY server.
 
 - The scripts are designed to run on an Oracle Linux 8 Machine (server edition).
 - During installation it requires internet access to download the necessary packages.
-- `sudo` permissions
+- `sudo` permissions (you might get prompted for your password during the installation
+  process).
 - Install git:
     ```
     sudo dnf update -y
@@ -46,13 +47,15 @@ chmod +x *.sh
 ### Lifecycle management
 
 The `./install-all.sh` script is designed to run multiple times. You can also use it
-to update the vantage6 node to the latest version. It will not overwrite any configuration files except if you explicitly tell it to do so.
+to update the vantage6 node to the latest version. It will not overwrite any
+configuration files except if you explicitly tell it to do so.
 
 You have the following scripts available to manage the vantage6 node:
 
 - `./start.sh` - Starts the vantage6 node
 - `./stop.sh` - Stops the vantage6 node
 - `./attach.sh` - View the logs of the vantage6 node if its running
+- ./install-all.sh - Reinstall and reconfigure the vantage6 node
 
 ### Debugging
 
@@ -63,4 +66,5 @@ going wrong, please reach out to the IKNL vantage6 team.
 
 ## License
 
-This project is licensed under the License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the Apache License - see the [LICENSE](LICENSE) file for
+details.
