@@ -23,7 +23,12 @@
     # Tunnel settings
     print_step "Setting tunnel settings"
     export TUNNEL_HOSTNAME=$OMOP_HOST
-    export SSH_HOST=$(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1)
+    if ! check_command "hostname"; then
+        print_step "Installing hostname package"
+        sudo dnf install -y hostname
+    fi
+    export SSH_HOST=$(hostname -I | awk '{print $1}')
+
     export SSH_PORT=22
     print_step "SSH_HOST: $SSH_HOST, SSH_PORT: $SSH_PORT"
 
