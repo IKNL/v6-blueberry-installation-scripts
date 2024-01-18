@@ -1,3 +1,4 @@
 
 *.log
 /node.tpl
+/settings.env

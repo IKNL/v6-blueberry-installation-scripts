@@ -125,6 +125,34 @@ check_env() {
     return 0
 }
 
+is_set() {
+    local var_name="$1"
+    if [ -z "${!var_name}" ]; then
+        if [ "$silent" != "silent" ]; then
+            print_warning "Variable '$var_name' is not set" >&2
+        fi
+        return 1
+    fi
+
+    return 0
+}
+set_if_unset() {
+    local var_name="$1"
+    local value="$2"
+
+    if [ -z  "${!var_name}" ]; then
+        eval "$var_name=$value"
+    fi
+}
+is_set_or_prompt() {
+    local var_name="$1"
+
+    if ! is_set "$var_name"; then
+        echo -n "  ? Please enter the value for $var_name: "; read -r VALUE
+        eval "$var_name=$VALUE"
+    fi
+}
+
 select_database_method() {
     print_step "The following database options are available:"
     # print_step "Please choose an option:"
@@ -144,8 +172,33 @@ select_database_method() {
     done
     DB_METHOD=$opt
     print_step $DB_METHOD
+}
+
+select_config_option() {
+    local options=(
+        "Delete existing config file and create a new one"
+        "Update existing config file with previous settings (e.g. API key, OMOP)"
+        "Keep existing config file and do not update it"
+    )
+    for i in "${!options[@]}"; do
+        echo "  # $((i+1)). ${options[$i]}"
+    done
+
+    while true; do
+        echo -e -n "\e[32m  ? Please select an option: \e[0m"; read -n1 -r REPLY
+        if [[ $REPLY -ge 1 && $REPLY -le ${#options[@]} ]]; then
+            opt="${options[$((REPLY-1))]}"
+            break
+        else
+            print_error "Invalid option. Please try again."
+        fi
+    done
+    CONFIG_OPTION=$REPLY
+    print_step $opt
 
 }
+
+
 
 user_input() {
     echo -e -n "\e[32m  ? $1: \e[0m"; read -r REPLY
