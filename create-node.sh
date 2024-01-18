@@ -130,7 +130,7 @@ if [ "$WRITE_CONFIG_FILE" = true ]; then
         echo "export OMOP_CDM_SCHEMA=$OMOP_CDM_SCHEMA" >> $SCRIPT_DIR/settings.env
         echo "export OMOP_RESULT_SCHEMA=$OMOP_RESULT_SCHEMA" >> $SCRIPT_DIR/settings.env
         echo "export OMOP_HOST=$OMOP_HOST" >> $SCRIPT_DIR/settings.env
-        if is_set "DOCKER_SERVICE_CONTAINER_LABEL"; then
+        if is_set "DOCKER_SERVICE_CONTAINER_LABEL" "silent"; then
             echo "export DOCKER_SERVICE_CONTAINER_LABEL=$DOCKER_SERVICE_CONTAINER_LABEL" >> $SCRIPT_DIR/settings.env
         fi
     fi

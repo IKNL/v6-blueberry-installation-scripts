@@ -25,7 +25,7 @@
     export TUNNEL_HOSTNAME=$OMOP_HOST
     if ! check_command "hostname"; then
         print_step "Installing hostname package"
-        sudo dnf install -y hostname
+        sudo dnf install -y hostname &>> $LOG_DIR/install-hostname.log
     fi
     export SSH_HOST=$(hostname -I | awk '{print $1}')
 

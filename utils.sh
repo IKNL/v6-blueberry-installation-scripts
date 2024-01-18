@@ -127,6 +127,7 @@ check_env() {
 
 is_set() {
     local var_name="$1"
+    local silent="$2"
     if [ -z "${!var_name}" ]; then
         if [ "$silent" != "silent" ]; then
             print_warning "Variable '$var_name' is not set" >&2
