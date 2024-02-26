@@ -55,20 +55,6 @@ if [ "$WRITE_CONFIG_FILE" = true ]; then
     export API_KEY=$API_KEY
 
     # OMOP database settings
-    is_set_or_prompt "OMOP_PORT"
-    export OMOP_PORT=$OMOP_PORT
-    is_set_or_prompt "OMOP_DATABASE"
-    export OMOP_DATABASE=$OMOP_DATABASE
-    is_set_or_prompt "OMOP_USER"
-    export OMOP_USER=$OMOP_USER
-    is_set_or_prompt "OMOP_PASSWORD"
-    export OMOP_PASSWORD=$OMOP_PASSWORD
-    is_set_or_prompt "OMOP_CDM_SCHEMA"
-    export OMOP_CDM_SCHEMA=$OMOP_CDM_SCHEMA
-    is_set_or_prompt "OMOP_RESULT_SCHEMA"
-    export OMOP_RESULT_SCHEMA=$OMOP_RESULT_SCHEMA
-
-
     if is_set "OMOP_HOST" "silent"; then
         if is_set "DOCKER_SERVICE_CONTAINER_LABEL" "silent"; then
             print_step "Using previous Docker service container label: $DOCKER_SERVICE_CONTAINER_LABEL"
@@ -82,6 +68,19 @@ if [ "$WRITE_CONFIG_FILE" = true ]; then
         # config file
         select_database_method
     fi
+
+    is_set_or_prompt "OMOP_PORT"
+    export OMOP_PORT=$OMOP_PORT
+    is_set_or_prompt "OMOP_DATABASE"
+    export OMOP_DATABASE=$OMOP_DATABASE
+    is_set_or_prompt "OMOP_USER"
+    export OMOP_USER=$OMOP_USER
+    is_set_or_prompt "OMOP_PASSWORD"
+    export OMOP_PASSWORD=$OMOP_PASSWORD
+    is_set_or_prompt "OMOP_CDM_SCHEMA"
+    export OMOP_CDM_SCHEMA=$OMOP_CDM_SCHEMA
+    is_set_or_prompt "OMOP_RESULT_SCHEMA"
+    export OMOP_RESULT_SCHEMA=$OMOP_RESULT_SCHEMA
 
     case "$DB_METHOD" in
         "Docker-service")
