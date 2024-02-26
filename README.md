@@ -26,9 +26,8 @@ BLUEBERRY server.
   name.
 
 ### Installing
-
-To get started with these scripts, execute the following steps in `bash`:
-
+Go to the home directory of the user that has `sudo` permissions and execute the
+following steps in `bash`:
 
 ```bash
 # Clone this repository to your local machine:
