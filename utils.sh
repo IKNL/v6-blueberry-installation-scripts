@@ -71,7 +71,7 @@ print_outro(){
     echo "before starting the vantage6-node."
     echo ""
     echo -e "\e[1;32mYou need to restart this machine before you can start the node.\e[0m"
-
+    echo -e "\e[1;32mMake sure that you can reach this machine after reboot!\e[0m"
     print_divider
 }
 
@@ -142,7 +142,7 @@ set_if_unset() {
     local value="$2"
 
     if [ -z  "${!var_name}" ]; then
-        eval "$var_name=$value"
+        declare "$var_name=$value"
     fi
 }
 is_set_or_prompt() {
@@ -150,7 +150,7 @@ is_set_or_prompt() {
 
     if ! is_set "$var_name"; then
         echo -n "  ? Please enter the value for $var_name: "; read -r VALUE
-        eval "$var_name=$VALUE"
+        declare "$var_name=$VALUE"
     fi
 }
 
