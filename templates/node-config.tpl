@@ -31,13 +31,13 @@ algorithm_device_requests:
 # # specify custom Docker images to use for starting the different
 # # components.
 # # OPTIONAL
-# images:
-#   node: harbor2.vantage6.ai/infrastructure/node:cotopaxi
-#   alpine: harbor2.vantage6.ai/infrastructure/alpine
-#   vpn_client: harbor2.vantage6.ai/infrastructure/vpn_client
-#   network_config: harbor2.vantage6.ai/infrastructure/vpn_network
-#   ssh_tunnel: harbor2.vantage6.ai/infrastructure/ssh_tunnel
-#   squid: harbor2.vantage6.ai/infrastructure/squid
+images:
+  node: harbor2.vantage6.ai/infrastructure/node:${VANTAGE6_VERSION}
+  ssh_tunnel: harbor2.vantage6.ai/infrastructure/ssh-tunnel:${VANTAGE6_VERSION}
+  # alpine: harbor2.vantage6.ai/infrastructure/alpine
+  # vpn_client: harbor2.vantage6.ai/infrastructure/vpn_client
+  # network_config: harbor2.vantage6.ai/infrastructure/vpn_network
+  # squid: harbor2.vantage6.ai/infrastructure/squid
 
 # path or endpoint to the local data source. The client can request a
 # certain database by using its label. The type is used by the
@@ -146,7 +146,7 @@ logging:
   # (optional) set the individual log levels per logger name, for example
   # mute some loggers that are too verbose.
   loggers:
-    - name: urllib
+    - name: urllib3
       level: warning
     - name: requests
       level: warning

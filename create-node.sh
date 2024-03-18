@@ -3,6 +3,10 @@ source $SCRIPT_DIR/utils.sh
 CONFIG_FILE=$HOME/.config/vantage6/node/blueberry.yaml
 CONFIG_FILE_TEMPLATE=$SCRIPT_DIR/node.tpl
 
+# already set by the install-vantage6.sh script, but if run independently
+is_set_or_prompt "VANTAGE6_VERSION"
+export VANTAGE6_VERSION=$VANTAGE6_VERSION
+
 WRITE_CONFIG_FILE=true
 KEEP_PREVIOUS_SETTINGS=false
 if [ -f "$CONFIG_FILE" ]; then
@@ -15,7 +19,7 @@ if [ -f "$CONFIG_FILE" ]; then
     elif [ "$CONFIG_OPTION" = "2" ]; then
         print_step "Updating config file"
         WRITE_CONFIG_FILE=true
-        KEEP_PREVIOUS_SETTINGS=true
+        KEEP_PREVIOUS_SETTINGS=true # excluding the vantage6 version
     elif [ "$CONFIG_OPTION" = "3" ]; then
         print_step "Skipping config file creation"
         WRITE_CONFIG_FILE=false
