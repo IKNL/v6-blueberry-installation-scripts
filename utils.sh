@@ -142,7 +142,7 @@ set_if_unset() {
     local value="$2"
 
     if [ -z  "${!var_name}" ]; then
-        declare "$var_name=$value"
+        export "$var_name=$value"
     fi
 }
 is_set_or_prompt() {
@@ -150,7 +150,7 @@ is_set_or_prompt() {
 
     if ! is_set "$var_name"; then
         echo -n "  ? Please enter the value for $var_name: "; read -r VALUE
-        declare "$var_name=$VALUE"
+        export "$var_name=$VALUE"
     fi
 }
 

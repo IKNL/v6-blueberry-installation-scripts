@@ -3,6 +3,10 @@ source $SCRIPT_DIR/utils.sh
 CONFIG_FILE=$HOME/.config/vantage6/node/blueberry.yaml
 CONFIG_FILE_TEMPLATE=$SCRIPT_DIR/node.tpl
 
+# already set by the install-vantage6.sh script, but if run independently
+is_set_or_prompt "VANTAGE6_VERSION"
+export VANTAGE6_VERSION=$VANTAGE6_VERSION
+
 WRITE_CONFIG_FILE=true
 KEEP_PREVIOUS_SETTINGS=false
 if [ -f "$CONFIG_FILE" ]; then
@@ -15,7 +19,7 @@ if [ -f "$CONFIG_FILE" ]; then
     elif [ "$CONFIG_OPTION" = "2" ]; then
         print_step "Updating config file"
         WRITE_CONFIG_FILE=true
-        KEEP_PREVIOUS_SETTINGS=true
+        KEEP_PREVIOUS_SETTINGS=true # excluding the vantage6 version
     elif [ "$CONFIG_OPTION" = "3" ]; then
         print_step "Skipping config file creation"
         WRITE_CONFIG_FILE=false
@@ -50,10 +54,6 @@ if [ "$WRITE_CONFIG_FILE" = true ]; then
     # Vantage6 node settings
     export TASK_DIR=$HOME/tasks
     mkdir -p $TASK_DIR
-
-    # already set by the install-vantage6.sh script, but if run independently
-    is_set_or_prompt "VANTAGE6_VERSION"
-    export VANTAGE6_VERSION=$VANTAGE6_VERSION
 
     is_set_or_prompt "API_KEY"
     export API_KEY=$API_KEY
@@ -133,7 +133,6 @@ if [ "$WRITE_CONFIG_FILE" = true ]; then
         echo "export OMOP_CDM_SCHEMA=$OMOP_CDM_SCHEMA" >> $SCRIPT_DIR/settings.env
         echo "export OMOP_RESULT_SCHEMA=$OMOP_RESULT_SCHEMA" >> $SCRIPT_DIR/settings.env
         echo "export OMOP_HOST=$OMOP_HOST" >> $SCRIPT_DIR/settings.env
-        echo "export VANTAGE6_VERSION=$VANTAGE6_VERSION" >> $SCRIPT_DIR/settings.env
         if is_set "DOCKER_SERVICE_CONTAINER_LABEL" "silent"; then
             echo "export DOCKER_SERVICE_CONTAINER_LABEL=$DOCKER_SERVICE_CONTAINER_LABEL" >> $SCRIPT_DIR/settings.env
         fi
