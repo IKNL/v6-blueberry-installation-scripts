@@ -7,7 +7,7 @@ source $HOME/.bashrc
 source $SCRIPT_DIR/utils.sh
 print_info &>> $LOG_DIR/vantage6-install.log
 
-DEFAULT_VANTAGE6_VERSION="4.3.1"
+DEFAULT_VANTAGE6_VERSION="4.4.0"
 
 # Check if the vantage6 environment already exists
 print_step "Checking if the vantage6 environment already exists"
