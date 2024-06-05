@@ -11,12 +11,13 @@ DEFAULT_VANTAGE6_VERSION="4.3.1"
 
 # Check if the vantage6 environment already exists
 print_step "Checking if the vantage6 environment already exists"
-if conda env list | grep -q 'vantage6'
+
+if check_env "vantage6" "silent"
 then
     print_warning "The vantage6 environment already exists" | tee -a $LOG_DIR/vantage6-install.log
 else
     # Create a new conda environment with Python 3.10
-    print_step "Creating a new conda environment with Python 3.10"
+    print_step "Creating a new conda environment with Python 3.10" | tee -a $LOG_DIR/vantage6-install.log
     conda create -n vantage6 python=3.10 -y &>> $LOG_DIR/vantage6-install.log
 fi
 

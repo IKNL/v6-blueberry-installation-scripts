@@ -115,10 +115,13 @@ check_command() {
 
 check_env() {
     local env_name="$1"
+    local silent="$2"
 
     # Check if the environment exists
     if ! conda env list | grep -q "^$env_name "; then
-        print_error "conda environment '$env_name' does not exist" >&2
+        if [ "$silent" != "silent" ]; then
+            print_error "conda environment '$env_name' does not exist" >&2
+        fi
         return 1
     fi
 
