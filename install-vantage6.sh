@@ -7,7 +7,7 @@ source $HOME/.bashrc
 source $SCRIPT_DIR/utils.sh
 print_info &>> $LOG_DIR/vantage6-install.log
 
-DEFAULT_VANTAGE6_VERSION="4.5.3"
+DEFAULT_VANTAGE6_VERSION="4.9.1"
 
 # Check if the vantage6 environment already exists
 print_step "Checking if the vantage6 environment already exists"
@@ -37,7 +37,7 @@ then
     # Ask for confirmation to upgrade the vantage6 package
     if confirm "Do you want to install an alternative version?"
     then
-        user_input "vantage6 version (e.g. 4.5.3): "
+        user_input "vantage6 version (e.g. 4.9.1): "
         user_vantage6_version=$REPLY
         print_step "Installing the vantage6 package: $user_vantage6_version"
         pip install vantage6==$user_vantage6_version &>> $LOG_DIR/vantage6-install.log
